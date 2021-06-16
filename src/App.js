@@ -1,8 +1,8 @@
-import Login from "./components/login";
+import LoginPage from "./pages/loginPage";
 import { Route, Switch } from "react-router-dom";
 import Navbar from "./components/navbar";
-import Register from "./components/register";
-import Products from "./components/products";
+import RegisterPage from "./pages/registerPage";
+import ProductsPage from "./pages/productsPage";
 import "./App.css";
 import "./index.css";
 
@@ -12,9 +12,9 @@ function App() {
       <Navbar />
       <div className="container mx-auto px-6 h-screen">
         <Switch>
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
-          <Route path="/" component={Products} />
+          <Route path="/login" component={LoginPage} />
+          <Route path="/register" component={RegisterPage} />
+          <Route path="/" component={ProductsPage} />
         </Switch>
       </div>
     </>
