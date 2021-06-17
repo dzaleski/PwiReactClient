@@ -5,6 +5,7 @@ function CartProduct({
   description,
   productName,
   price,
+  quantity,
   onMinus,
   onPlus,
   onRemove,
@@ -31,6 +32,7 @@ function CartProduct({
         <input
           className="mx-2 border text-center w-8 focus:outline-none"
           type="text"
+          value={quantity}
         />
 
         <button onClick={onPlus} className="focus:outline-none">

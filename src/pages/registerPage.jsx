@@ -1,14 +1,10 @@
 import React from "react";
-import { registerUser } from "../services/authService";
+import { authService } from "../services/authService";
 import RegisterForm from "../components/registerForm";
 
 function RegisterPage() {
   const tryRegister = (formFields) => {
-    registerUser(formFields)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((errors) => console.log(errors));
+    authService.registerUser(formFields).catch((errors) => console.log(errors));
   };
 
   return <RegisterForm onSubmit={tryRegister} />;

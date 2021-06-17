@@ -1,42 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CartProduct from "../components/cartProduct";
+import { cartService } from "../services/cartService";
 
 function CartPage() {
-  const products = [
-    {
-      id: 1,
-      imageURL:
-        "https://www.clipartmax.com/png/middle/29-294684_journal-tomato-icon.png",
-      description: "super tomato",
-      productName: "Tomato",
-      price: "556",
-    },
-    {
-      id: 2,
-      imageURL:
-        "https://www.clipartmax.com/png/middle/29-294684_journal-tomato-icon.png",
-      description: "super tomato",
-      productName: "Tomato",
-      price: "556",
-    },
-    {
-      id: 3,
-      imageURL:
-        "https://www.clipartmax.com/png/middle/29-294684_journal-tomato-icon.png",
-      description: "super tomato",
-      productName: "Tomato",
-      price: "556",
-    },
-    {
-      id: 4,
-      imageURL:
-        "https://www.clipartmax.com/png/middle/29-294684_journal-tomato-icon.png",
-      description: "super tomato",
-      productName: "Tomato",
-      price: "556",
-    },
-  ];
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    cartService.cart.subscribe((cart) => {
+      setProducts(cart);
+    });
+  }, []);
 
   return (
     <div className="container mx-auto mt-10">
@@ -61,15 +35,17 @@ function CartPage() {
             </h3>
           </div>
 
-          {products.map((p) => (
-            <CartProduct
-              key={p.id}
-              description={p.description}
-              productName={p.productName}
-              imageUrl={p.imageURL}
-              price={p.price}
-            />
-          ))}
+          {products &&
+            products.map((p, index) => (
+              <CartProduct
+                key={index}
+                description={p.description}
+                productName={p.name}
+                imageUrl={p.imageURL}
+                price={p.price}
+                quantity={p.quantity}
+              />
+            ))}
 
           <Link
             to="/"
