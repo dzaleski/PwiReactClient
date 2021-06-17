@@ -1,15 +1,13 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { MenuIcon, XIcon } from '@heroicons/react/outline'
-import { Link } from 'react-router-dom';
+import { Fragment } from "react";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { MenuIcon, XIcon } from "@heroicons/react/outline";
+import { Link } from "react-router-dom";
 
-const navigation = [
-  { name: 'Products', to: '/', current: true },
-]
+const navigation = [{ name: "Products", to: "/", current: true }];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
 export default function Navbar() {
@@ -38,10 +36,12 @@ export default function Navbar() {
                         key={item.name}
                         to={item.to}
                         className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'px-3 py-2 rounded-md text-sm font-medium'
+                          item.current
+                            ? "bg-gray-900 text-white"
+                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                          "px-3 py-2 rounded-md text-l font-medium"
                         )}
-                        aria-current={item.current ? 'page' : undefined}
+                        aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
                       </Link>
@@ -51,32 +51,48 @@ export default function Navbar() {
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <Link
-                        to='/login'
-                        className={classNames(
-                          false ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'px-3 py-2 rounded-md text-sm font-medium'
-                        )}
-                        aria-current={false ? 'page' : undefined}
-                      >
-                        Login
-                      </Link>
-                      <Link
-                        to='/register'
-                        className={classNames(
-                          false ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'px-3 py-2 rounded-md text-sm font-medium'
-                        )}
-                        aria-current={false ? 'page' : undefined}
-                      >
-                        Sign Up
-                      </Link>
+                  to="/login"
+                  className={classNames(
+                    false
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                    "px-3 py-2 rounded-md text-l font-medium"
+                  )}
+                  aria-current={false ? "page" : undefined}
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  className={classNames(
+                    false
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                    "px-3 py-2 rounded-md text-l font-medium"
+                  )}
+                  aria-current={false ? "page" : undefined}
+                >
+                  Sign Up
+                </Link>
+                <Link
+                  to="/cart"
+                  className={classNames(
+                    false
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                    "px-3 py-2 rounded-md text-2xl mr-2 font-medium"
+                  )}
+                  aria-current={false ? "page" : undefined}
+                >
+                  <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                </Link>
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="ml-3 relative">
                   {({ open }) => (
                     <>
                       <div>
-                        <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                        <Menu.Button className="bg-gray-800 flex text-l rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                           <span className="sr-only">Open user menu</span>
                           <img
                             className="h-8 w-8 rounded-full"
@@ -104,8 +120,8 @@ export default function Navbar() {
                               <Link
                                 to="/"
                                 className={classNames(
-                                  active ? 'bg-gray-100' : '',
-                                  'block px-4 py-2 text-sm text-gray-700'
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-l text-gray-700"
                                 )}
                               >
                                 Profile
@@ -117,8 +133,8 @@ export default function Navbar() {
                               <Link
                                 to="/"
                                 className={classNames(
-                                  active ? 'bg-gray-100' : '',
-                                  'block px-4 py-2 text-sm text-gray-700'
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-l text-gray-700"
                                 )}
                               >
                                 Orders
@@ -141,10 +157,12 @@ export default function Navbar() {
                   key={item.name}
                   href={item.href}
                   className={classNames(
-                    item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'block px-3 py-2 rounded-md text-base font-medium'
+                    item.current
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                    "block px-3 py-2 rounded-md text-base font-medium"
                   )}
-                  aria-current={item.current ? 'page' : undefined}
+                  aria-current={item.current ? "page" : undefined}
                 >
                   {item.name}
                 </a>
@@ -154,5 +172,5 @@ export default function Navbar() {
         </>
       )}
     </Disclosure>
-  )
+  );
 }
