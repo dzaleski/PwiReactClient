@@ -5,10 +5,10 @@ import SearchInput from "../components/serachInput";
 
 function ProductsPage() {
   const categories = [
-    { categoryName: "Przyprawy" },
-    { categoryName: "Owoce" },
-    { categoryName: "Warzywa" },
-    { categoryName: "Pieczywo" },
+    { id: 1, categoryName: "Przyprawy" },
+    { id: 2, categoryName: "Owoce" },
+    { id: 3, categoryName: "Warzywa" },
+    { id: 4, categoryName: "Pieczywo" },
   ];
 
   const products = [

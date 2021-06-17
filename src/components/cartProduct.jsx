@@ -18,10 +18,7 @@ function CartProduct({
         <div className="flex flex-col justify-between ml-4 flex-grow">
           <span className="font-bold text-sm">{productName}</span>
           <span className="text-red-500 text-xs">{description}</span>
-          <button
-            className="font-semibold w-1 hover:text-red-500 text-gray-500 text-xs"
-            onClick={console.log("Removed")}
-          >
+          <button className="font-semibold w-1 hover:text-red-500 text-gray-500 text-xs">
             Remove
           </button>
         </div>

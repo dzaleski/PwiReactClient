@@ -84,7 +84,7 @@ export default function Navbar() {
                   )}
                   aria-current={false ? "page" : undefined}
                 >
-                  <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                  <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                 </Link>
 
                 {/* Profile dropdown */}

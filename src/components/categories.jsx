@@ -5,7 +5,7 @@ function Categories({ categories }) {
   return (
     <div className="rounded max-w-full flex flex-col bg-white shadow-lg m-5">
       {categories.map((c) => (
-        <Category categoryName={c.categoryName} />
+        <Category key={c.id} categoryName={c.categoryName} />
       ))}
     </div>
   );
