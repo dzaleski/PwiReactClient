@@ -26,7 +26,7 @@ function BForm({ fields, btnText, submit }) {
   };
 
   return (
-    <div className="mx-auto w-full max-w-2xl mt-10">
+    <div className="mx-auto w-full max-w-3xl mt-10">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"

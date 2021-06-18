@@ -4,21 +4,40 @@ import CartProduct from "../components/cartProduct";
 import { cartService } from "../services/cartService";
 
 function CartPage() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(cartService.cartValue);
 
   useEffect(() => {
-    cartService.cart.subscribe((cart) => {
-      setProducts(cart);
-    });
+    cartService.cart.subscribe(setProducts);
   }, []);
+
+  const computeTotalPrice = (price, quantity) => {
+    return price * quantity;
+  };
+  const computeTotalCartPrice = (price, quantity) => {
+    let result = 0;
+    products.forEach((p) => (result += p.quantity * p.price));
+    return result;
+  };
+  const handleMinus = (id) => {
+    cartService.decreaseProductQuantity(id);
+  };
+  const handlePlus = (id) => {
+    cartService.increaseProductQuantity(id);
+  };
+  const handleRemove = (id) => {
+    cartService.removeProductFromCart(id);
+  };
+  const isCartEmpty = () => {
+    return products.length === 0;
+  };
 
   return (
     <div className="container mx-auto mt-10">
-      <div className="flex shadow-md my-10">
-        <div className="w-3/4 bg-white px-10 py-10">
+      <div className="flex shadow-lg my-10">
+        <div className="w-full bg-white rounded px-10 py-10">
           <div className="flex justify-between border-b pb-8">
             <h1 className="font-semibold text-2xl">Shopping Cart</h1>
-            <h2 className="font-semibold text-2xl">3 Items</h2>
+            <h2 className="font-semibold text-2xl">{products.length} Items</h2>
           </div>
           <div className="flex mt-10 mb-5">
             <h3 className="font-semibold text-gray-600 text-xs uppercase w-2/5">
@@ -36,67 +55,39 @@ function CartPage() {
           </div>
 
           {products &&
-            products.map((p, index) => (
+            products.map((p) => (
               <CartProduct
-                key={index}
+                key={p.id}
+                id={p.id}
                 description={p.description}
                 productName={p.name}
                 imageUrl={p.imageURL}
                 price={p.price}
                 quantity={p.quantity}
+                totalPrice={computeTotalPrice(p.price, p.quantity)}
+                onMinus={handleMinus}
+                onPlus={handlePlus}
+                onRemove={handleRemove}
               />
             ))}
-
+          <div className="flex items-center hover:bg-gray-100 pr-6 py-5 text-green-600 text-xl font-semibold border-b-2 border-grey">
+            <div className="flex w-full">Total cost</div>
+            <div className="text-center w-1/5">{computeTotalCartPrice()}</div>
+          </div>
           <Link
             to="/"
-            className="flex font-semibold text-indigo-600 text-sm mt-10"
+            className="flex font-semibold text-green-600 text-sm mt-10"
           >
             Continue Shopping
           </Link>
-        </div>
-
-        <div id="summary" className="w-1/4 px-8 py-10">
-          <h1 className="font-semibold text-2xl border-b pb-8">
-            Order Summary
-          </h1>
-          <div className="flex justify-between mt-10 mb-5">
-            <span className="font-semibold text-sm uppercase">Items 3</span>
-            <span className="font-semibold text-sm">590$</span>
-          </div>
-          <div>
-            <label className="font-medium inline-block mb-3 text-sm uppercase">
-              Shipping
-            </label>
-            <select className="block p-2 text-gray-600 w-full text-sm">
-              <option>Standard shipping - $10.00</option>
-            </select>
-          </div>
-          <div className="py-10">
-            <label
-              htmlFor="promo"
-              className="font-semibold inline-block mb-3 text-sm uppercase"
+          {!isCartEmpty() && (
+            <Link
+              to="/summary"
+              className="bg-indigo-500 font-semibold mt-6 hover:bg-indigo-600 py-3 text-sm text-white uppercase block text-center"
             >
-              Promo Code
-            </label>
-            <input
-              type="text"
-              id="promo"
-              placeholder="Enter your code"
-              className="p-2 text-sm w-full"
-            />
-          </div>
-          <button className="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase">
-            Apply
-          </button>
-          <div className="border-t mt-8">
-            <div className="flex font-semibold justify-between py-6 text-sm uppercase">
-              <span>Total cost</span>
-              <span>$600</span>
-            </div>
-            <button className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
               Checkout
-            </button>
-          </div>
+            </Link>
+          )}
         </div>
       </div>
     </div>

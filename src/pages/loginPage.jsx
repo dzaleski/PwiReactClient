@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { authService } from "../services/authService";
 import LoginForm from "../components/loginForm";
 import { useHistory } from "react-router-dom";
 
 function LoginPage() {
-  const [errors, setErrors] = useState(false);
   const history = useHistory();
 
   const tryLogin = (formFields) => {
     authService
       .loginUser(formFields)
-      .then((response) => {
+      .then(() => {
         history.push("/");
       })
       .catch((errors) => console.log(errors));

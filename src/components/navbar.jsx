@@ -1,9 +1,9 @@
-/* This example requires Tailwind CSS v2.0+ */
 import { Fragment, useEffect, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
 import { authService } from "../services/authService";
+import { cartService } from "../services/cartService";
 
 const navigation = [{ name: "Products", to: "/", current: true }];
 
@@ -13,12 +13,20 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const [token, setToken] = useState(authService.tokenValue);
+  const [products, setProducts] = useState(cartService.cartValue);
+
+  const isLogged = () => token !== "";
 
   useEffect(() => {
     authService.token.subscribe(setToken);
+    cartService.cart.subscribe(setProducts);
   }, []);
 
-  const isLogged = () => token !== "";
+  const getProductsCount = () => {
+    let count = 0;
+    products.forEach((p) => (count += p.quantity));
+    return count;
+  };
 
   return (
     <Disclosure as="nav" className="bg-gray-800">
@@ -40,21 +48,14 @@ export default function Navbar() {
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
-                    {navigation.map((item) => (
+                    {isLogged() && (
                       <Link
-                        key={item.name}
-                        to={item.to}
-                        className={classNames(
-                          item.current
-                            ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                          "px-3 py-2 rounded-md text-l font-medium"
-                        )}
-                        aria-current={item.current ? "page" : undefined}
+                        to="/"
+                        className="text-gray-300 hover:bg-gray-700 hover:text-white containerpx-3 px-3 py-2 rounded-md text-l font-medium"
                       >
-                        {item.name}
+                        Products
                       </Link>
-                    ))}
+                    )}
                   </div>
                 </div>
               </div>
@@ -98,6 +99,10 @@ export default function Navbar() {
                     )}
                     aria-current={false ? "page" : undefined}
                   >
+                    <span class="bg-green-400 px-3 font-bold py-1 mr-3 text-center rounded-full text-white">
+                      {getProductsCount()}
+                    </span>
+
                     <i className="fa fa-shopping-cart" aria-hidden="true"></i>
                   </Link>
                 )}

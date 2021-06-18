@@ -1,11 +1,13 @@
 import React from "react";
 
 function CartProduct({
+  id,
   imageUrl,
   description,
   productName,
   price,
   quantity,
+  totalPrice,
   onMinus,
   onPlus,
   onRemove,
@@ -19,13 +21,16 @@ function CartProduct({
         <div className="flex flex-col justify-between ml-4 flex-grow">
           <span className="font-bold text-sm">{productName}</span>
           <span className="text-red-500 text-xs">{description}</span>
-          <button className="font-semibold w-1 hover:text-red-500 text-gray-500 text-xs">
+          <button
+            onClick={() => onRemove(id)}
+            className="font-semibold w-1 hover:text-red-500 text-gray-500 text-xs"
+          >
             Remove
           </button>
         </div>
       </div>
       <div className="flex justify-center w-1/5">
-        <button onClick={onMinus} className="focus:outline-none">
+        <button onClick={() => onMinus(id)} className="focus:outline-none">
           <i className="fa fa-minus"></i>
         </button>
 
@@ -33,14 +38,17 @@ function CartProduct({
           className="mx-2 border text-center w-8 focus:outline-none"
           type="text"
           value={quantity}
+          onChange={() => {}}
         />
 
-        <button onClick={onPlus} className="focus:outline-none">
+        <button onClick={() => onPlus(id)} className="focus:outline-none">
           <i className="fa fa-plus"></i>
         </button>
       </div>
       <span className="text-center w-1/5 font-semibold text-sm">{price}</span>
-      <span className="text-center w-1/5 font-semibold text-sm">{price}</span>
+      <span className="text-center w-1/5 font-semibold text-sm">
+        {totalPrice}
+      </span>
     </div>
   );
 }

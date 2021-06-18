@@ -2,15 +2,30 @@ import React, { useEffect, useState } from "react";
 import Categories from "../components/categories";
 import ProductCard from "../components/productCard";
 import SearchInput from "../components/serachInput";
-import getProducts from "../services/productsService";
+import { productsService } from "../services/productsService";
 import { cartService } from "../services/cartService";
+import { categoriesService } from "../services/categoriesService";
 
 function ProductsPage() {
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    getProducts().then((res) => {
+    productsService.getProducts().then((res) => {
       setProducts(res.data);
+      setFilteredProducts(res.data);
+    });
+
+    categoriesService.getCategories().then((res) => {
+      setCategories([
+        ...res.data,
+        {
+          name: "Wszystkie",
+          description: "Po prostu wszystkie produkty",
+          id: -1,
+        },
+      ]);
     });
   }, []);
 
@@ -19,22 +34,32 @@ function ProductsPage() {
     cartService.addItemToCart(addedProduct);
   };
 
-  const categories = [
-    { id: 1, categoryName: "Przyprawy" },
-    { id: 2, categoryName: "Owoce" },
-    { id: 3, categoryName: "Warzywa" },
-    { id: 4, categoryName: "Pieczywo" },
-  ];
+  const handleCategorySerach = (categoryId) => {
+    if (categoryId === -1) {
+      setFilteredProducts(products);
+      return;
+    }
+    const result = products.filter((p) => p.category.id === categoryId);
+    setFilteredProducts(result);
+  };
+
+  const handleSearchChange = (phrase) => {
+    if (phrase === "") {
+      setFilteredProducts(products);
+    }
+    const result = products.filter((p) =>
+      p.name.toLowerCase().includes(phrase.toLowerCase())
+    );
+    setFilteredProducts(result);
+  };
 
   return (
-    <div className="flex flex-row w-full justify-center mt-6 space-x-4">
-      <div className="w-1/4">
-        <SearchInput />
-        <Categories categories={categories} />
-      </div>
+    <div className="flex flex-col max-w-3xl mx-auto mt-6 space-y-6">
+      <SearchInput onChange={handleSearchChange} />
+      <Categories categories={categories} onClick={handleCategorySerach} />
       <div className="w-full space-y-4">
-        {products &&
-          products.map((p) => (
+        {filteredProducts &&
+          filteredProducts.map((p) => (
             <ProductCard
               key={p.id}
               id={p.id}

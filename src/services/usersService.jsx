@@ -1,5 +1,11 @@
-import httpClient from "../utilities/tokenHttpClient";
+import axios from "axios";
 
-function getCurrentUser() {
-  httpClient.get("users");
+const API_URL = "https://localhost:5001/api/";
+
+function getCurrentUser(token) {
+  return axios.get(API_URL + "users", token);
 }
+
+export const usersService = {
+  getCurrentUser,
+};
