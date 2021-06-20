@@ -9,11 +9,13 @@ import "./App.css";
 import "./index.css";
 import { authService } from "./services/authService";
 import { useEffect, useState } from "react";
+import OrdersPage from "./pages/ordersPage";
 
 function App() {
   const [token, setToken] = useState(authService.tokenValue);
 
   useEffect(() => {
+    authService.setTokenFromLocalStorage();
     authService.token.subscribe(setToken);
   }, []);
 
@@ -37,6 +39,7 @@ function App() {
           <Switch>
             <Route path="/cart" component={CartPage} />
             <Route path="/summary" component={SummaryPage} />
+            <Route path="/orders" component={OrdersPage} />
             <Route path="/" exact component={ProductsPage} />
           </Switch>
         )}

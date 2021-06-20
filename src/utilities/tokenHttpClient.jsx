@@ -10,4 +10,11 @@ httpClient.interceptors.request.use(function (config) {
   return config;
 });
 
+httpClient.interceptors.response.use(null, (error) => {
+  if (error.config && error.response && error.response.status === 401) {
+    authService.logoutUser();
+  }
+  return Promise.reject(error);
+});
+
 export default httpClient;

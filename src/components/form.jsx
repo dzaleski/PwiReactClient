@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import BInput from "./formField";
+import SelectInput from "./selectInput";
 
 function BForm({ fields, btnText, submit }) {
   const {
@@ -29,26 +30,42 @@ function BForm({ fields, btnText, submit }) {
     <div className="mx-auto w-full max-w-3xl mt-10">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        className="bg-white shadow-lg rounded px-8 pt-6 pb-8 mb-4"
       >
         <p className="text-4xl tracking-tight font-bold mb-6 text-center">
           {btnText}
         </p>
-        {fields.map((f) => (
-          <span key={f.fieldName}>
-            <BInput
-              placeholder={f.placeholder}
-              fieldName={f.fieldName}
-              register={register}
-              validation={f.validation}
-              type={f.type}
-              label={f.label}
-            />
-            {errors &&
-              f.fieldName in errors &&
-              formatError(errors[f.fieldName])}
-          </span>
-        ))}
+        {fields.map((f) => {
+          if (f.type === "select") {
+            return (
+              <SelectInput
+                key={f.fieldName}
+                placeholder={f.placeholder}
+                fieldName={f.fieldName}
+                register={register}
+                validation={f.validation}
+                label={f.label}
+                options={f.options}
+              />
+            );
+          }
+          return (
+            <span key={f.fieldName}>
+              <BInput
+                placeholder={f.placeholder}
+                fieldName={f.fieldName}
+                register={register}
+                validation={f.validation}
+                type={f.type}
+                label={f.label}
+              />
+
+              {errors &&
+                f.fieldName in errors &&
+                formatError(errors[f.fieldName])}
+            </span>
+          );
+        })}
         <div className="flex items-center justify-between">
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
