@@ -48,6 +48,7 @@ function OrdersPage() {
                   orders.map((o) => (
                     <OrderTableItem
                       key={o.id}
+                      id={o.id}
                       customer={o.customer}
                       orderDate={o.orderDate.split(" ")[0]}
                       totalCost={o.totalCost}

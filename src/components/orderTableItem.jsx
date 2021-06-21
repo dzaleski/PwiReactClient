@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-function OrderTableItem({ customer, orderDate, totalCost }) {
+function OrderTableItem({ id, customer, orderDate, totalCost }) {
   const [t] = useTranslation();
   return (
     <tr>
@@ -22,7 +22,10 @@ function OrderTableItem({ customer, orderDate, totalCost }) {
         </span>
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-        <Link to="/thanks" className="text-indigo-600 hover:text-indigo-900">
+        <Link
+          to={"/orders/details/" + id}
+          className="text-indigo-600 hover:text-indigo-900"
+        >
           {t("ordersPage.view")}
         </Link>
       </td>

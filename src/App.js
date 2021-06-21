@@ -13,6 +13,7 @@ import { Suspense, useEffect, useState } from "react";
 import OrdersPage from "./pages/ordersPage";
 import { useTranslation } from "react-i18next";
 import ThanksPage from "./pages/thanksPage";
+import OrdersDetailsPage from "./pages/ordersDetailsPage";
 
 function App() {
   const [token, setToken] = useState(authService.tokenValue);
@@ -41,6 +42,7 @@ function App() {
           )}
           {isLoggedIn() && (
             <Switch>
+              <Route path="/orders/details/:id" component={OrdersDetailsPage} />
               <Route path="/cart" component={CartPage} />
               <Route path="/summary" component={SummaryPage} />
               <Route path="/orders" component={OrdersPage} />

@@ -26,6 +26,10 @@
     "totalCost": "Total cost",
     "view": "Details"
   },
+  "ordersDetailsPage": {
+    "title": "Order details",
+    "back": "Back to orders"
+  },
   "navbar": {
     "products": "Products",
     "login": "Login",

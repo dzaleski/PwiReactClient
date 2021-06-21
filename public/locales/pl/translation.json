@@ -26,6 +26,10 @@
     "totalCost": "Razem",
     "view": "Szczegóły"
   },
+  "ordersDetailsPage": {
+    "title": "Szczegóły zamówienia",
+    "back": "Wróc do zamówień"
+  },
   "navbar": {
     "products": "Produkty",
     "login": "Logowanie",
