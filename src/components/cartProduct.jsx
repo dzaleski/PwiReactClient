@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 function CartProduct({
   id,
@@ -12,6 +13,8 @@ function CartProduct({
   onPlus,
   onRemove,
 }) {
+  const [t] = useTranslation();
+
   return (
     <div className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
       <div className="flex w-2/5">
@@ -19,13 +22,17 @@ function CartProduct({
           <img className="h-24" src={imageUrl} alt="Cart product" />
         </div>
         <div className="flex flex-col justify-between ml-4 flex-grow">
-          <span className="font-bold text-sm">{productName}</span>
-          <span className="text-red-500 text-xs">{description}</span>
+          <span className="font-bold text-sm">
+            {t("products." + productName + ".name")}
+          </span>
+          <span className="text-red-500 text-xs">
+            {t("products." + productName + ".description")}
+          </span>
           <button
             onClick={() => onRemove(id)}
             className="font-semibold w-1 hover:text-red-500 text-gray-500 text-xs"
           >
-            Remove
+            {t("cartPage.remove")}
           </button>
         </div>
       </div>

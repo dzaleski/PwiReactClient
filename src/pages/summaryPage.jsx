@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import SummaryForm from "../components/summaryForm";
 import SummaryItem from "../components/summaryItem";
 import { cartService } from "../services/cartService";
 import { ordersService } from "../services/ordersService";
+import { useHistory } from "react-router-dom";
 
 function SummaryPage() {
   const [summaryProducts, setSummaryProducts] = useState(cartService.cartValue);
+  const [t] = useTranslation();
+  const history = useHistory();
 
   useEffect(() => {
     let subscription = cartService.cart.subscribe(setSummaryProducts);
@@ -34,12 +38,14 @@ function SummaryPage() {
       products: productsId,
     };
 
-    ordersService.addOrder(newOrder);
+    ordersService.addOrder(newOrder).then(() => {
+      history.push("/thanks");
+    });
   };
 
   return (
     <div className="w-full md:w-1/2 mx-auto">
-      <h4 className="text-3xl text-gray-700 mb-5">Order Summary</h4>
+      <h4 className="text-3xl text-gray-700 mb-5">{t("summaryPage.title")}</h4>
       <div className="p-5 rounded shadow-lg bg-white">
         {summaryProducts.map((p) => (
           <SummaryItem
@@ -53,7 +59,9 @@ function SummaryPage() {
           />
         ))}
         <div className="flex mt-3 justify-between text-xl">
-          <span className="text-l font-semibold text-green-600">Total</span>
+          <span className="text-l font-semibold text-green-600">
+            {t("summaryPage.total")}
+          </span>
           <span className="text-l font-semibold text-green-600">
             {computeTotalCartPrice()} PLN
           </span>

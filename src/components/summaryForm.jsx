@@ -29,7 +29,7 @@ function SummaryForm({ onSubmit }) {
     },
 
     {
-      fieldName: "zipcode",
+      fieldName: "zipCode",
       label: "Zip code",
       placeholder: "e.g. 05-120",
       validation: {
@@ -66,7 +66,7 @@ function SummaryForm({ onSubmit }) {
     },
   ];
 
-  return <BForm submit={onSubmit} fields={fields} btnText="Confirm" />;
+  return <BForm submit={onSubmit} fields={fields} btnText="confirm" />;
 }
 
 export default SummaryForm;

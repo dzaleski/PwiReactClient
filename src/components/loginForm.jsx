@@ -27,7 +27,7 @@ function LoginForm({ onSubmit }) {
     },
   ];
 
-  return <BForm submit={onSubmit} fields={fields} btnText="Login" />;
+  return <BForm submit={onSubmit} fields={fields} btnText="login" />;
 }
 
 export default LoginForm;

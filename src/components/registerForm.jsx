@@ -37,7 +37,7 @@ function RegisterForm({ onSubmit }) {
     },
   ];
 
-  return <BForm submit={onSubmit} fields={fields} btnText="Sign Up" />;
+  return <BForm submit={onSubmit} fields={fields} btnText="signUp" />;
 }
 
 export default RegisterForm;

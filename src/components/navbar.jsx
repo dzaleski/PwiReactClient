@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 import { authService } from "../services/authService";
 import { cartService } from "../services/cartService";
 import { usersService } from "../services/usersService";
-
-const navigation = [{ name: "Products", to: "/", current: true }];
+import { useTranslation } from "react-i18next";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -16,6 +15,7 @@ export default function Navbar() {
   const [token, setToken] = useState(authService.tokenValue);
   const [products, setProducts] = useState(cartService.cartValue);
   const [currentUser, setCurrentUser] = useState({});
+  const [t, i18n] = useTranslation();
 
   const isLogged = () => token !== "";
 
@@ -38,6 +38,10 @@ export default function Navbar() {
     return count;
   };
 
+  const handleTranslate = (lang) => {
+    i18n.changeLanguage(lang);
+  };
+
   return (
     <Disclosure as="nav" className="bg-gray-800 sticky top-0 z-50">
       {({ open }) => (
@@ -58,12 +62,24 @@ export default function Navbar() {
               <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
+                    <button
+                      onClick={() => handleTranslate("en")}
+                      className="text-gray-300 focus:outline-none hover:bg-gray-700 hover:text-white containerpx-3 px-3 py-2 rounded-md text-l font-medium"
+                    >
+                      EN
+                    </button>
+                    <button
+                      onClick={() => handleTranslate("pl")}
+                      className="text-gray-300  focus:outline-none hover:bg-gray-700 hover:text-white containerpx-3 px-3 py-2 rounded-md text-l font-medium"
+                    >
+                      PL
+                    </button>
                     {isLogged() && (
                       <Link
                         to="/"
                         className="text-gray-300 hover:bg-gray-700 hover:text-white containerpx-3 px-3 py-2 rounded-md text-l font-medium"
                       >
-                        Products
+                        {t("navbar.products")}
                       </Link>
                     )}
                   </div>
@@ -81,7 +97,7 @@ export default function Navbar() {
                     )}
                     aria-current={false ? "page" : undefined}
                   >
-                    Login
+                    {t("navbar.login")}
                   </Link>
                 )}
                 {!isLogged() && (
@@ -95,7 +111,7 @@ export default function Navbar() {
                     )}
                     aria-current={false ? "page" : undefined}
                   >
-                    Sign Up
+                    {t("navbar.signUp")}
                   </Link>
                 )}
                 {isLogged() && (
@@ -127,7 +143,7 @@ export default function Navbar() {
                             <span className="sr-only">Open user menu</span>
                             {currentUser.email && (
                               <span className="text-white">
-                                Witaj {currentUser.email}
+                                {t("navbar.welcome")} {currentUser.email}
                               </span>
                             )}
                           </Menu.Button>
@@ -185,21 +201,26 @@ export default function Navbar() {
 
           <Disclosure.Panel className="sm:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              {navigation.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className={classNames(
-                    item.current
-                      ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "block px-3 py-2 rounded-md text-base font-medium"
-                  )}
-                  aria-current={item.current ? "page" : undefined}
+              <button
+                onClick={() => handleTranslate("en")}
+                className="text-gray-300 focus:outline-none hover:bg-gray-700 hover:text-white containerpx-3 px-3 py-2 rounded-md text-l font-medium"
+              >
+                EN
+              </button>
+              <button
+                onClick={() => handleTranslate("pl")}
+                className="text-gray-300  focus:outline-none hover:bg-gray-700 hover:text-white containerpx-3 px-3 py-2 rounded-md text-l font-medium"
+              >
+                PL
+              </button>
+              {isLogged() && (
+                <Link
+                  to="/"
+                  className="text-gray-300 hover:bg-gray-700 hover:text-white containerpx-3 px-3 py-2 rounded-md text-l font-medium"
                 >
-                  {item.name}
-                </a>
-              ))}
+                  {t("navbar.products")}
+                </Link>
+              )}
             </div>
           </Disclosure.Panel>
         </>

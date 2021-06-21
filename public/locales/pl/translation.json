@@ -1,0 +1,107 @@
+{
+  "productsPage": {
+    "search": "Szukaj",
+    "add": "Dodaj"
+  },
+  "cartPage": {
+    "cart": "Koszyk",
+    "items": "Przedmiotów",
+    "productDetails": "Szczegóły produktu",
+    "quantity": "Ilość",
+    "price": "Cena",
+    "total": "Razem",
+    "totalCost": "Cena koszyka",
+    "continueShopping": "Kontynuuj zakupy",
+    "checkout": "Podsumowanie",
+    "remove": "Usuń"
+  },
+  "summaryPage": {
+    "title": "Podsumowanie zamówienia",
+    "total": "Razem",
+    "count": "Ilość"
+  },
+  "ordersPage": {
+    "customer": "Klient",
+    "orderDate": "Data zamówienia",
+    "totalCost": "Razem",
+    "view": "Szczegóły"
+  },
+  "navbar": {
+    "products": "Produkty",
+    "login": "Logowanie",
+    "signUp": "Rejestracja",
+    "welcome": "Witaj"
+  },
+  "categories": {
+    "breads": "Pieczywo",
+    "fruits": "Owoce",
+    "vegetables": "Warzywa",
+    "all": "Wszystkie"
+  },
+  "products": {
+    "tomato": {
+      "name": "Pomidor",
+      "description": "Pyszny soczysty pomidor!"
+    },
+    "roll": {
+      "name": "Bułka",
+      "description": "Ciepłe bułeczki!"
+    },
+    "bread": {
+      "name": "Chleb",
+      "description": "Pyszny chlebek!"
+    }
+  },
+  "form": {
+    "email": {
+      "label": "Email",
+      "placeholder": "np. jankowalski@o2.pl"
+    },
+    "password": {
+      "label": "Hasło",
+      "placeholder": "**************"
+    },
+    "repeatPassword": {
+      "label": "Powtórz hasło",
+      "placeholder": "**************"
+    },
+    "firstName": {
+      "label": "Imię",
+      "placeholder": "np. Jan"
+    },
+    "lastName": {
+      "label": "Nazwisko",
+      "placeholder": "np. Kowalski"
+    },
+    "city": {
+      "label": "Miasto",
+      "placeholder": "np. Warszawa"
+    },
+    "zipCode": {
+      "label": "Kod pocztowy",
+      "placeholder": "np. 05-121"
+    },
+    "address": {
+      "label": "Adres",
+      "placeholder": "np. Rumiankowa 20"
+    },
+    "country": {
+      "label": "Państwo",
+      "placeholder": "np. Polska"
+    },
+    "submitButton": {
+      "confirm": "Zatwierdź",
+      "login": "Zaloguj",
+      "signUp": "Zarejestruj"
+    },
+    "title": {
+      "confirm": "Dane zamówienia",
+      "login": "Logowanie",
+      "signUp": "Rejestracja"
+    }
+  },
+  "cookies": {
+    "alertText": "Ten serwis wykorzystuje pliki cookies. Korzystanie z witryny oznacza zgodę na ich zapis lub odczyt wg ustawień przeglądarki.",
+    "buttonText": "Rozumiem"
+  }
+}

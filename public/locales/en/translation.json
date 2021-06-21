@@ -1,0 +1,107 @@
+{
+  "productsPage": {
+    "search": "Search",
+    "add": "Add"
+  },
+  "cartPage": {
+    "cart": "Shopping cart",
+    "items": "Items",
+    "productDetails": "Product details",
+    "quantity": "Quantity",
+    "price": "Price",
+    "total": "Total",
+    "totalCost": "Total cost",
+    "continueShopping": "Continue shopping",
+    "checkout": "Checkout",
+    "remove": "Remove"
+  },
+  "summaryPage": {
+    "title": "Order Summary",
+    "total": "Total",
+    "count": "Count"
+  },
+  "ordersPage": {
+    "customer": "Customer",
+    "orderDate": "Order date",
+    "totalCost": "Total cost",
+    "view": "Details"
+  },
+  "navbar": {
+    "products": "Products",
+    "login": "Login",
+    "signUp": "Sign Up",
+    "welcome": "Welcome"
+  },
+  "categories": {
+    "breads": "Bread",
+    "fruits": "Fruits",
+    "vegetables": "Vegetables",
+    "all": "All"
+  },
+  "products": {
+    "tomato": {
+      "name": "Tomato",
+      "description": "Delicious tomato!"
+    },
+    "roll": {
+      "name": "Roll",
+      "description": "Softy and warm rolls!"
+    },
+    "bread": {
+      "name": "Bread",
+      "description": "Crispy bread!"
+    }
+  },
+  "form": {
+    "email": {
+      "label": "Email",
+      "placeholder": "e.g. johndoe@gmail.com"
+    },
+    "password": {
+      "label": "Password",
+      "placeholder": "**************"
+    },
+    "repeatPassword": {
+      "label": "Password confirmation",
+      "placeholder": "**************"
+    },
+    "firstName": {
+      "label": "First name",
+      "placeholder": "e.g. John"
+    },
+    "lastName": {
+      "label": "Last name",
+      "placeholder": "e.g. Doe"
+    },
+    "city": {
+      "label": "City",
+      "placeholder": "np. Warsaw"
+    },
+    "zipCode": {
+      "label": "Postal code",
+      "placeholder": "np. 05-121"
+    },
+    "address": {
+      "label": "Address",
+      "placeholder": "np. Street 20"
+    },
+    "country": {
+      "label": "Country",
+      "placeholder": "np. Poland"
+    },
+    "submitButton": {
+      "confirm": "Confirm",
+      "login": "Login",
+      "signUp": "Sign Up"
+    },
+    "title": {
+      "confirm": "Order details",
+      "login": "Login",
+      "signUp": "Sign Up"
+    }
+  },
+  "cookies": {
+    "alertText": "This website uses cookies. By using the website, you agree to their reading or writing according to your browser settings.",
+    "buttonText": "Got it!"
+  }
+}

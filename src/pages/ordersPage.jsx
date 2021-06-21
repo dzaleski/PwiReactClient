@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { ordersService } from "../services/ordersService";
 import OrderTableItem from "../components/orderTableItem";
+import { useTranslation } from "react-i18next";
 
 function OrdersPage() {
   const [orders, setOrders] = useState([]);
-
+  const [t] = useTranslation();
   useEffect(() => {
     ordersService.getAllOrders().then((res) => {
-      //setOrders(res.data);
-      console.log(res.data);
+      setOrders(res.data);
     });
   }, []);
 
@@ -24,33 +24,33 @@ function OrdersPage() {
                     scope="col"
                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
-                    Customer
+                    {t("ordersPage.customer")}
                   </th>
                   <th
                     scope="col"
                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
-                    Order date
+                    {t("ordersPage.orderDate")}
                   </th>
                   <th
                     scope="col"
                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
-                    Total cost
+                    {t("ordersPage.totalCost")}
                   </th>
                   <th scope="col" className="relative px-6 py-3">
-                    <span className="sr-only">Edit</span>
+                    <span className="sr-only"> {t("ordersPage.view")}</span>
                   </th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {orders &&
-                  orders.map((o, index) => (
+                  orders.map((o) => (
                     <OrderTableItem
                       key={o.id}
-                      fullName={o.firstName + " " + o.lastName}
-                      orderDate={o.orderDate}
-                      orderId={o.id}
+                      customer={o.customer}
+                      orderDate={o.orderDate.split(" ")[0]}
+                      totalCost={o.totalCost}
                     />
                   ))}
               </tbody>

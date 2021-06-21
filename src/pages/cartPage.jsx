@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import CartProduct from "../components/cartProduct";
 import { cartService } from "../services/cartService";
 
 function CartPage() {
   const [products, setProducts] = useState(cartService.cartValue);
+  const [t] = useTranslation();
 
   useEffect(() => {
-    cartService.cart.subscribe(setProducts);
+    const subscription = cartService.cart.subscribe(setProducts);
+
+    return () => subscription.unsubscribe();
   }, []);
 
   const computeTotalPrice = (price, quantity) => {
@@ -36,21 +40,23 @@ function CartPage() {
       <div className="flex shadow-lg my-10">
         <div className="w-full bg-white rounded px-10 py-10">
           <div className="flex justify-between border-b pb-8">
-            <h1 className="font-semibold text-2xl">Shopping Cart</h1>
-            <h2 className="font-semibold text-2xl">{products.length} Items</h2>
+            <h1 className="font-semibold text-2xl">{t("cartPage.cart")}</h1>
+            <h2 className="font-semibold text-2xl">
+              {products.length} {t("cartPage.items")}
+            </h2>
           </div>
           <div className="flex mt-10 mb-5">
             <h3 className="font-semibold text-gray-600 text-xs uppercase w-2/5">
-              Product Details
+              {t("cartPage.productDetails")}
             </h3>
             <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">
-              Quantity
+              {t("cartPage.quantity")}
             </h3>
             <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">
-              Price
+              {t("cartPage.price")}
             </h3>
             <h3 className="font-semibold text-center text-gray-600 text-xs uppercase w-1/5 text-center">
-              Total
+              {t("cartPage.total")}
             </h3>
           </div>
 
@@ -71,21 +77,21 @@ function CartPage() {
               />
             ))}
           <div className="flex items-center hover:bg-gray-100 pr-6 py-5 text-green-600 text-xl font-semibold border-b-2 border-grey">
-            <div className="flex w-full">Total cost</div>
+            <div className="flex w-full">{t("cartPage.totalCost")}</div>
             <div className="text-center w-1/5">{computeTotalCartPrice()}</div>
           </div>
           <Link
             to="/"
             className="flex font-semibold text-green-600 text-sm mt-10"
           >
-            Continue Shopping
+            {t("cartPage.continueShopping")}
           </Link>
           {!isCartEmpty() && (
             <Link
               to="/summary"
               className="bg-indigo-500 font-semibold mt-6 hover:bg-indigo-600 py-3 text-sm text-white uppercase block text-center"
             >
-              Checkout
+              {t("cartPage.checkout")}
             </Link>
           )}
         </div>

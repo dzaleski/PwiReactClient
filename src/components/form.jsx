@@ -1,9 +1,12 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import BInput from "./formField";
 import SelectInput from "./selectInput";
 
 function BForm({ fields, btnText, submit }) {
+  const [t] = useTranslation();
+
   const {
     register,
     handleSubmit,
@@ -33,18 +36,18 @@ function BForm({ fields, btnText, submit }) {
         className="bg-white shadow-lg rounded px-8 pt-6 pb-8 mb-4"
       >
         <p className="text-4xl tracking-tight font-bold mb-6 text-center">
-          {btnText}
+          {t(`form.title.${btnText}`)}
         </p>
         {fields.map((f) => {
           if (f.type === "select") {
             return (
               <SelectInput
                 key={f.fieldName}
-                placeholder={f.placeholder}
+                placeholder={t(`form.${f.fieldName}.placeholder`)}
                 fieldName={f.fieldName}
                 register={register}
                 validation={f.validation}
-                label={f.label}
+                label={t(`form.${f.fieldName}.label`)}
                 options={f.options}
               />
             );
@@ -52,12 +55,12 @@ function BForm({ fields, btnText, submit }) {
           return (
             <span key={f.fieldName}>
               <BInput
-                placeholder={f.placeholder}
+                placeholder={t(`form.${f.fieldName}.placeholder`)}
                 fieldName={f.fieldName}
                 register={register}
                 validation={f.validation}
                 type={f.type}
-                label={f.label}
+                label={t(`form.${f.fieldName}.label`)}
               />
 
               {errors &&
@@ -71,12 +74,12 @@ function BForm({ fields, btnText, submit }) {
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
-            {btnText}
+            {t(`form.submitButton.${btnText}`)}
           </button>
         </div>
       </form>
       <p className="text-center text-gray-500 text-xs">
-        &copy;2021 Daniel Shop - All rights reserved.
+        &copy;2021 Daniel Załęski
       </p>
     </div>
   );
